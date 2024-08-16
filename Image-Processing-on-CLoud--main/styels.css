@@ -1,0 +1,128 @@
+body {
+    background-color: #000000; /* Dark background */
+    color: #8cff8c; /* Light green text */
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding-top: 50px;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+h1 {
+    font-size: 48px; /* Adjusted font size */
+    margin-bottom: 20px;
+}
+
+form {
+    margin-bottom: 30px;
+}
+
+.form-group, .operation-group {
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.form-group label, .form-group input, .operation-group select {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+input[type="file"] {
+    display: none; /* Hide the actual file input */
+}
+
+label[for="file-input"], #upload-button {
+    width: 200px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    margin: 0 10px;
+}
+
+label[for="file-input"] {
+    background-color: #b3ecff; /* Light blue button */
+    color: #000000;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 24px; /* Adjusted font size */
+}
+
+#upload-button {
+    background-color: #ffcccc; /* Light pink button */
+    color: #000000;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    font-size: 24px; /* Adjusted font size */
+}
+
+.operation-group select {
+    width: 250px;
+    height: 40px;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+#message {
+    margin-top: 20px;
+    font-size: 24px; /* Adjusted font size */
+}
+
+.success {
+    color: #8cff8c; /* Light green text for success */
+}
+
+.error {
+    color: #ffcccc; /* Light pink text for error */
+}
+
+h2 {
+    font-size: 32px; /* Adjusted font size */
+    color: #ffcccc; /* Light pink text */
+    margin-bottom: 20px;
+    text-align: left;
+    margin-left: 10%;
+}
+
+#status {
+    display: flex;
+    justify-content: space-around;
+    font-size: 24px; /* Adjusted font size */
+    color: #ffffff; /* White text for status */
+    text-align: left;
+}
+
+.status-item {
+    width: 40%;
+    border: 2px solid #ffcccc;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: left;
+}
+
+.status-item p {
+    margin: 5px 0;
+}
+
+.task-list {
+    height: 300px;
+    overflow-y: scroll;
+    border-top: 1px solid #ffcccc;
+    padding-top: 10px;
+}
+
+.button {
+    background-color: #b3ecff; /* Light blue button */
+    color: #000000;
+    padding: 10px 20px; /* Adjusted padding */
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 24px; /* Adjusted font size */
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 20px;
+}

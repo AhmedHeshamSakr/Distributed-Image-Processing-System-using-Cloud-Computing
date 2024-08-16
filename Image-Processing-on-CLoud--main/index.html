@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload Images for Processing</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Upload Images for Processing</h1>
+        <form id="upload-form" action="/upload" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="file-input" class="custom-file-upload">Choose Files</label>
+                <input type="file" name="file" id="file-input" multiple>
+                <input type="submit" value="Upload" id="upload-button">
+            </div>
+            <div class="operation-group">
+                <select name="operation" id="operation">
+                    <option value="watershed_segmentation">Watershed Segmentation</option>
+                    <option value="canny_edge_detector">Canny Edge Detector</option>
+                    <option value="feature_matching">Feature Matching</option>
+                    <option value="face_detection">Face Detection</option>
+                </select>
+            </div>
+        </form>
+        <div id="message"></div>
+        <h2>Status:</h2>
+        <div id="status">
+            {% for worker in worker_status %}
+                <div class="status-item">
+                    <p><strong>VM: {{ worker.split(':')[0] }} ({{ worker }}):</strong></p>
+                    <div class="task-list">
+                        {% for status in worker_status[worker] %}
+                            <p>{{ status }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <h2>Results:</h2>
+        <div id="results">
+            <a href="{{ url_for('results_page') }}" class="button">View Results</a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('upload-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the form from submitting the default way
+            const formData = new FormData(this);
+
+            fetch('/upload', {
+                method: 'POST',
+                body: formData
+            }).then(response => {
+                if (response.ok) {
+                    document.getElementById('message').innerHTML = '<p class="success">Upload successful!</p>';
+                } else {
+                    document.getElementById('message').innerHTML = '<p class="error">Upload failed. Please try again.</p>';
+                }
+            }).catch(error => {
+                document.getElementById('message').innerHTML = '<p class="error">Upload failed. Please try again.</p>';
+            });
+        });
+
+        function fetchStatus() {
+            fetch('/status')
+                .then(response => response.json())
+                .then(data => {
+                    const statusDiv = document.getElementById('status');
+                    statusDiv.innerHTML = '';
+                    for (const worker of data) {
+                        const workerDiv = document.createElement('div');
+                        workerDiv.className = 'status-item';
+                        workerDiv.innerHTML = `<p><strong>VM: ${worker.id.split(':')[0]} (${worker.id}):</strong></p>`;
+                        const taskListDiv = document.createElement('div');
+                        taskListDiv.className = 'task-list';
+                        for (const status of worker.statuses) {
+                            const statusP = document.createElement('p');
+                            statusP.textContent = status;
+                            taskListDiv.appendChild(statusP);
+                        }
+                        workerDiv.appendChild(taskListDiv);
+                        statusDiv.appendChild(workerDiv);
+                    }
+                });
+        }
+
+        setInterval(fetchStatus, 5000); // Fetch status every 5 seconds
+    </script>
+</body>
+</html>

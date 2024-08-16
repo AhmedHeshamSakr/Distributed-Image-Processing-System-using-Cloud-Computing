@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Processing Results</h1>
+        <div id="results">
+            {% for result in results %}
+                <div class="result-item">
+                    <a href="{{ result }}" target="_blank">{{ result }}</a>
+                </div>
+            {% endfor %}
+        </div>
+        <a href="{{ url_for('index') }}" class="button">Back to Upload</a>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
