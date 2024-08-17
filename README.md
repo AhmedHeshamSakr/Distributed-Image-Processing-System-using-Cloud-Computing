@@ -83,9 +83,6 @@ The system was deployed to the cloud using Azure services:
 
 This project successfully demonstrates the use of cloud-based distributed computing for image processing tasks. The system's scalable architecture, fault tolerance, and advanced processing capabilities make it a versatile and robust platform for various image processing applications.
 
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 
 
